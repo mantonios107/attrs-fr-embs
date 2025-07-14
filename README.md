@@ -24,15 +24,16 @@ The embeddings were produced by different model from different repositories repo
 
 ### Macroscale analysis
 
-For the **macroscale analysis**, we used the script that you can find in *scripts/topo/energy_finetuning_jax.py*
-In addition, you can use the notebook "notebooks/energy_finetuning.ipynb" to finetune the energy model on your own dataset.
+The macroscale analysis depends on the CelebA dataset available [here](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html).
+We process this dataset according to the pipeline described in src_face/README.md.
+The raw LFW dataset is used as a sanity check but is not available anymore. An aligned version is available [here](https://www.kaggle.com/datasets/jessicali9530/lfw-dataset).
 
 
 ### Microscale analysis
 
-For the **microscale analysis**, we used [GanControl](https://arxiv.org/abs/2101.02477).
-For the microscale analysis, we used the script that you can find in *scripts/topo/energy_finetuning_jax.py.*
-In addition, you can use the notebook "notebooks/energy_gancontrol.ipynb" to finetune the energy model on your own 
+For the **microscale analysis**, we used [GanControl](https://arxiv.org/abs/2101.02477) to generate many small variations of fake individuals.
+The script at *scripts/topo/energy_finetuning_jax.py* processes gan control generated images. 
+In addition, you can use the notebook "notebooks/energy/energy_gancontrol.ipynb" to finetune the energy model on your own 
 
 
 ## Requirements
