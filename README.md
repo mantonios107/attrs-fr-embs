@@ -1,24 +1,38 @@
 # Attributes Shape the Embedding Space of Face Recognition Models
 
-This repository contains the official implementation of the paper:
+This repository contains the official implementation of the [paper](https://openreview.net/forum?id=VY74pP1w93):
 
 > **Attributes Shape the Embedding Space of Face Recognition Models**  
 > Pierrick Leroy, Antonio Mastropietro, Marco Nurisso, Francesco Vaccarino  
-> *Forty-second International Conference on Machine Learning (ICML)*  
+> *Forty-second International Conference on Machine Learning (ICML)*
 
 ## Introduction
 
 In this work, we investigate how facial attributes influence the embedding space of face recognition models, focusing on FaceNet, ArcFace, AdaFace. 
 By analyzing the relationship between attributes and embeddings, we provide insights into the sensitivity and structure of various Face Recognition models. 
-This repository includes the code and scripts to reproduce the experiments and results presented in the paper. 
+This repository includes the code and scripts to reproduce the experiments and results presented in the paper.
 
-For the microscale analysis, we used GanControl.
-For producing the embeddings, we used many different repositories, but the best embeddings can be obtained through the models described by *insightface*
+The embeddings were produced by different model from different repositories reported in the following table:
+| Model      | Architecture | Metric    | Train Set | Images (M) | Source Repository            |
+|------------|--------------|-----------|-----------|------------|------------------------------|
+| FaceNet    | iResNetv1    | euclidean | VGGFace2  | 3.31       | davidsandberg/facenet        |
+| ArcFace    | ResNet50     | cosine    | MS1MV3    | 5.18       | deepinsight/insightface      |
+| ArcFace    | ResNet18     | cosine    | MS1MV3    | 5.18       | deepinsight/insightface      |
+| AdaFace    | ResNet18     | cosine    | VGGFace2  | 3.31       | mk-minchul/AdaFace           |
+| SphereFaceR| iResNet100   | cosine    | MS1       | 10         | ydwen/opensphere             |
+
+
+### Macroscale analysis
+
+For the **macroscale analysis**, we used the script that you can find in *scripts/topo/energy_finetuning_jax.py*
+In addition, you can use the notebook "notebooks/energy_finetuning.ipynb" to finetune the energy model on your own dataset.
+
+
+### Microscale analysis
+
+For the **microscale analysis**, we used [GanControl](https://arxiv.org/abs/2101.02477).
 For the microscale analysis, we used the script that you can find in *scripts/topo/energy_finetuning_jax.py.*
 In addition, you can use the notebook "notebooks/energy_gancontrol.ipynb" to finetune the energy model on your own 
-
-For the macroscale analysis, we used the script that you can find in *scripts/topo/energy_finetuning_jax.py*
-In addition, you can use the notebook "notebooks/energy_finetuning.ipynb" to finetune the energy model on your own dataset.
 
 
 ## Requirements
