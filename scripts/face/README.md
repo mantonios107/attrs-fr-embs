@@ -1,3 +1,7 @@
+# Datasets preprocessing
+
+These steps were taken to preprocess the CelebA and LFW datasets.
+
 ## 1. Load datasets
 
 ```console
@@ -18,7 +22,7 @@ The folder data/lfw/ contains
 - male_names.txt :  text file storing gender attribute for each photo
 - female_names.txt : same for females
 
-Link to dataset [here](https://vis-www.cs.umass.edu/lfw/), we use the raw images (not aligned). The gender files from the paper "AFIF4: Deep Gender Classification based on AdaBoost-based Fusion of Isolated Facial Features and Foggy Faces" are on the same page under Resources -> LFW gender labeling
+Link to dataset [here](https://vis-www.cs.umass.edu/lfw/), we use the raw images (not aligned). The gender files from the paper ["AFIF4: Deep Gender Classification based on AdaBoost-based Fusion of Isolated Facial Features and Foggy Faces"](https://arxiv.org/abs/1706.04277) are on the same page under Resources -> LFW gender labeling
 
 ### 1.2 CelebA
 The folder data/CelebA/ contains
@@ -34,7 +38,6 @@ python detection.py --dataset_name lfw --path_model /home/disma_user/pleroy/.ins
 ```
 
 To run RetinaFace, it is necessary to have previously downloaded the onnx model det_10g.onnx. This model comes from insightface library (pip install or from git)
-Note: Pierrick could not test the script version directly on the cluster
 
 ## 3. Run recognition models
 
@@ -109,4 +112,4 @@ Restricting df_dataset to a high quality subset depends on the models because of
 
 
 ## Flow chart
-![Alt text](../imgs/Flowchart_topoface_datagen.drawio.png?raw=true)
+![Alt text](../../imgs/Flowchart_topoface_datagen.drawio.png?raw=true)
