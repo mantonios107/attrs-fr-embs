@@ -1,1 +1,41 @@
-# attrs-fr-embs
+# Attributes Shape the Embedding Space of Face Recognition Models
+
+This repository contains the official implementation of the paper:
+
+> **Attributes Shape the Embedding Space of Face Recognition Models**  
+> Pierrick Leroy, Antonio Mastropietro, Marco Nurisso, Francesco Vaccarino  
+> *Forty-second International Conference on Machine Learning (ICML)*  
+
+## Introduction
+
+In this work, we investigate how facial attributes influence the embedding space of face recognition models, focusing on FaceNet, ArcFace, AdaFace. 
+By analyzing the relationship between attributes and embeddings, we provide insights into the sensitivity and structure of various Face Recognition models. 
+This repository includes the code and scripts to reproduce the experiments and results presented in the paper. 
+
+For the microscale analysis, we used GanControl.
+For producing the embeddings, we used many different repositories, but the best embeddings can be obtained through the models described by *insightface*
+For the microscale analysis, we used the script that you can find in *scripts/topo/energy_finetuning_jax.py.*
+In addition, you can use the notebook "notebooks/energy_gancontrol.ipynb" to finetune the energy model on your own 
+
+For the macroscale analysis, we used the script that you can find in *scripts/topo/energy_finetuning_jax.py*
+In addition, you can use the notebook "notebooks/energy_finetuning.ipynb" to finetune the energy model on your own dataset.
+
+
+## Requirements
+To run the code, you need to install the following dependencies:
+
+```bash
+conda env create --name envname --file=environment_updated.yml
+```
+
+## Bibliography
+If you use this code in your research, please cite our paper:
+
+```
+@inproceedings{leroyattributes,
+  title={Attributes Shape the Embedding Space of Face Recognition Models},
+  author={Leroy, Pierrick and Mastropietro, Antonio and Nurisso, Marco and Vaccarino, Francesco},
+  booktitle={Forty-second International Conference on Machine Learning (ICML)},
+  year={2025}
+}
+```
