@@ -32,9 +32,11 @@ It relies on preprocessing the CelebA dataset according to the pipeline describe
 
 ### Microscale analysis
 
-For the **microscale analysis**, we used [GanControl](https://arxiv.org/abs/2101.02477) to generate many small variations of fake individuals.
+For the **microscale analysis**, we used [GanControl](https://arxiv.org/abs/2101.02477) to generate many small variations of fake individuals on a structured lattice.
+Each node of the lattice (corresponding to a face image) can then embedded with multiple face recognition models.
+This repository does not provide code for generating image, this part is done with GAN-control.
 The script at *scripts/topo/energy_finetuning_jax.py* processes gan control generated images. 
-In addition, you can use the notebook "notebooks/energy/energy_gancontrol.ipynb" to finetune the energy model on your own 
+In addition, you can see the notebook "notebooks/energy/energy_gancontrol.ipynb" to see how the energies are computed for two models.
 
 
 ## Requirements
