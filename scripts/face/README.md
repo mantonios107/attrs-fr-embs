@@ -24,6 +24,8 @@ The folder data/lfw/ contains
 
 Link to dataset [here](https://vis-www.cs.umass.edu/lfw/), we use the raw images (not aligned). The gender files from the paper ["AFIF4: Deep Gender Classification based on AdaBoost-based Fusion of Isolated Facial Features and Foggy Faces"](https://arxiv.org/abs/1706.04277) are on the same page under Resources -> LFW gender labeling
 
+07/2025: LFW has been deprecated, a backup of already aligned images is still available [here](https://www.kaggle.com/datasets/jessicali9530/lfw-dataset)
+
 ### 1.2 CelebA
 The folder data/CelebA/ contains
 - CelebA/: folder containing images
