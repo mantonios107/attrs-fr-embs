@@ -6,13 +6,32 @@ This repository contains the official implementation of the [paper](https://open
 > Pierrick Leroy, Antonio Mastropietro, Marco Nurisso, Francesco Vaccarino  
 > *Forty-second International Conference on Machine Learning (ICML)*
 
-## Introduction
+# Table of contents
 
-In this work, we investigate how facial attributes influence the embedding space of face recognition models, focusing on FaceNet, ArcFace, AdaFace. 
-By analyzing the relationship between attributes and embeddings, we provide insights into the sensitivity and structure of various Face Recognition models. 
+1. [Introduction](#introduction)
+   - Summary
+   - Embeddings
+3. Macroscale analysis
+   - Datasets and preprocessing
+   - Macroscale experiment
+4. Microscale analysis
+   - Data generation with generative models
+   - Microscale
+
+# Introduction
+
+## Summary
+
+In this work, we investigate how attributes influence the embedding space of deep learning models.
+While we focus on face recognition models like FaceNet, ArcFace and AdaFace, the methodology can be adapted to other domains. 
+By analyzing the relationship between attributes (in our case, facial attributes) and embeddings, we provide insights into the sensitivity and structure of models. 
 This repository includes the code and scripts to reproduce the experiments and results presented in the paper.
 
-The embeddings were produced by different model from different repositories reported in the following table:
+## Embeddings
+
+In this work we analyze the *embedding space*.
+To produce embeddings, a function mapping from the input space (face images) to the embedding space is needed.
+The embeddings were produced by a variety of models coming from different repositories reported in the following table:
 | Model      | Architecture | Metric    | Train Set | Images (M) | Source Repository            |
 |------------|--------------|-----------|-----------|------------|------------------------------|
 | FaceNet    | iResNetv1    | euclidean | VGGFace2  | 3.31       | davidsandberg/facenet        |
@@ -22,7 +41,7 @@ The embeddings were produced by different model from different repositories repo
 | SphereFaceR| iResNet100   | cosine    | MS1       | 10         | ydwen/opensphere             |
 
 
-### Macroscale analysis
+# Macroscale analysis
 
 The macroscale analysis depends on the CelebA dataset available [here](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html).
 The raw LFW dataset is used as a sanity check but is not available anymore. An aligned version is still available [here](https://www.kaggle.com/datasets/jessicali9530/lfw-dataset).
@@ -30,7 +49,7 @@ The raw LFW dataset is used as a sanity check but is not available anymore. An a
 The core of the macroscale analysis can be found in the notebook at notebooks/face/experiment_distance_macroscale.ipynb.\
 It relies on preprocessing the CelebA dataset according to the pipeline described in scripts/face/README.md.
 
-### Microscale analysis
+# Microscale analysis
 
 For the **microscale analysis**, we used [GanControl](https://arxiv.org/abs/2101.02477) to generate many small variations of fake individuals on a structured lattice.
 Each node of the lattice (corresponding to a face image) can then embedded with multiple face recognition models and a vector field can finally be derived (see the paper for more details).
