@@ -8,15 +8,15 @@ This repository contains the official implementation of the [paper](https://open
 
 # Table of contents
 
-1. [Introduction](#introduction)
-   - Summary
-   - Embeddings
-3. Macroscale analysis
-   - Datasets and preprocessing
-   - Macroscale experiment
-4. Microscale analysis
-   - Data generation with generative models
-   - Microscale
+1. [Introduction](#introduction)  
+   - [Summary](#summary)  
+   - [Embeddings](#embeddings)  
+2. [Macroscale analysis](#macroscale-analysis)  
+   - [Datasets and preprocessing](#datasets-and-preprocessing)  
+   - [Macroscale experiment](#macroscale-experiment)  
+3. [Microscale analysis](#microscale-analysis)  
+   - [Data generation with generative models](#data-generation-with-generative-models)  
+   - [Microscale](#microscale)
 
 # Introduction
 
@@ -34,11 +34,11 @@ To produce embeddings, a function mapping from the input space (face images) to 
 The embeddings were produced by a variety of models coming from different repositories reported in the following table:
 | Model      | Architecture | Metric    | Train Set | Images (M) | Source Repository            |
 |------------|--------------|-----------|-----------|------------|------------------------------|
-| FaceNet    | iResNetv1    | euclidean | VGGFace2  | 3.31       | davidsandberg/facenet        |
-| ArcFace    | ResNet50     | cosine    | MS1MV3    | 5.18       | deepinsight/insightface      |
-| ArcFace    | ResNet18     | cosine    | MS1MV3    | 5.18       | deepinsight/insightface      |
-| AdaFace    | ResNet18     | cosine    | VGGFace2  | 3.31       | mk-minchul/AdaFace           |
-| SphereFaceR| iResNet100   | cosine    | MS1       | 10         | ydwen/opensphere             |
+| FaceNet    | iResNetv1    | euclidean | VGGFace2  | 3.31       | [davidsandberg/facenet](https://github.com/davidsandberg/facenet)        |
+| ArcFace    | ResNet50     | cosine    | MS1MV3    | 5.18       | [deepinsight/insightface](https://github.com/deepinsight/insightface)      |
+| ArcFace    | ResNet18     | cosine    | MS1MV3    | 5.18       | [deepinsight/insightface](https://github.com/deepinsight/insightface)      |
+| AdaFace    | ResNet18     | cosine    | VGGFace2  | 3.31       | [mk-minchul/AdaFace](https://github.com/mk-minchul/AdaFace)           |
+| SphereFaceR| iResNet100   | cosine    | MS1       | 10         | [ydwen/opensphere](https://github.com/ydwen/opensphere)             |
 
 
 # Macroscale analysis
