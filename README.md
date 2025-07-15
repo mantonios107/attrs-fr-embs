@@ -11,21 +11,34 @@ This repository contains the official implementation of the [paper](https://open
 1. [Introduction](#introduction)  
    - [Summary](#summary)  
    - [Embeddings](#embeddings)  
-2. [Macroscale analysis](#macroscale-analysis)  
+2. [Macroscale analysis](#macroscale-analysis-)  
    - [Datasets and preprocessing](#datasets-and-preprocessing)  
    - [Macroscale experiment](#macroscale-experiment)  
-3. [Microscale analysis](#microscale-analysis)  
+3. [Microscale analysis](#microscale-analysis-)  
    - [Data generation with generative models](#data-generation-with-generative-models)  
-   - [Microscale](#microscale)
+   - [Microscale experiment](#microscale-experiment)
+4. [Requirements](#requirements)
+5. [Bibliography](#bibliography)
 
 # Introduction
 
 ## Summary
 
+
+
 In this work, we investigate how attributes influence the embedding space of deep learning models.
 While we focus on face recognition models like FaceNet, ArcFace and AdaFace, the methodology can be adapted to other domains. 
 By analyzing the relationship between attributes (in our case, facial attributes) and embeddings, we provide insights into the sensitivity and structure of models. 
+
+A peculiarity of the embedding space of Face Recognition models is that they have a hierarchical structure (see image).
+This can be the case more generally for models trained by contrastive losses on classes.
+This is important for our analysis since we have broken down embedding space analysis at two different scale:\
+👨 The *macroscale* is the scale where all photos of an identity are indistinguishable\
+📷 The *microscale* is more granular and is the scale of photos of a single individual
+
 This repository includes the code and scripts to reproduce the experiments and results presented in the paper.
+
+<img src="imgs/header.png" alt="Alt text" width="1000"/>
 
 ## Embeddings
 
@@ -41,13 +54,14 @@ The embeddings were produced by a variety of models coming from different reposi
 | SphereFaceR| iResNet100   | cosine    | MS1       | 10         | [ydwen/opensphere](https://github.com/ydwen/opensphere)             |
 
 
-# Macroscale analysis
+# Macroscale analysis 👨
 
 ## Datasets and preprocessing
 
-The macroscale analysis is performed on the CelebA dataset.
-The raw Labelled Faces in the Wild (LFW) dataset is used as a sanity check, for instance to produce these histograms of distances on the face *verification task* i.e. classifying pairs of images as matching or non-matching:
-![Alt text](imgs/lfw_histogram_arcface_r18.pdf)
+The macroscale analysis is performed on the **CelebA** dataset.
+The raw **Labelled Faces in the Wild **(LFW) dataset is used as a sanity check to verify that models perform well on this easy dataset and for instance to produce these histograms of distances on the face *verification task* i.e. classifying pairs of images as matching or non-matching:
+
+<img src="imgs/lfw_histogram_arcface_r18-1.png" alt="Alt text" width="300"/>
 
 Links to datasets:\
 💾 [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html). \
@@ -65,25 +79,57 @@ The objective of the preprocessing is to address common issues like:
 ## Macroscale experiment
 
 🎯 The core of the macroscale analysis can be found in the notebook at [notebooks/face/experiment_distance_macroscale.ipynb](notebooks/face).\
+In this notebook the following steps are done for the 5 models described in [this table](#embeddings)
+1. Loading of a preprocessed (high quality subset) of CelebA
+2. Computation of attributes intra- (and inter-) entropies
+3. Computation of distance distribution in the embedding space, KS-statistics and aggregation of the results
+4. Correlations between the KS-statistics and the entropies
+5. A few visualizations of the results
+
+# Microscale analysis 📷
+
+## Data generation with generative models
+
+For the **microscale analysis**, we used GanControl ([paper](https://arxiv.org/abs/2101.02477), [code](https://github.com/amazon-science/gan-control)) to generate fake individuals with many variations.
+We generate data on a structured lattice as described in the paper, allowing us to design segments in image space along which a single attribute varies (see rows in image below).
+Each node of the lattice (corresponding to a face image) can then be embedded with multiple face recognition models and a vector field can finally be derived, see the paper for a precise explanation.
+This repository does not provide code for generating image, this part is done with GAN-control, but here is the type of command that we used on GAN-control
 
 
-# Microscale analysis
+```python 
+[controller.gen_batch_by_controls(latent=initial_latent_w, input_is_latent=True,age=x)[0] for x in segment_age]
+```
+With this code, we generate image along a segment with orientation varying step by step according to the pre-defined `segment_age`  while other attributes stay fixed.
+We can do this for the other default attributes proposed by GAN-control, for example hair:
+```python 
+[controller.gen_batch_by_controls(latent=initial_latent_w, input_is_latent=True,hair=x)[0] for x in segment_hair]
+```
+The produced image would look something like this:
+<img src="imgs/segments.png" alt="Alt text" width="1000"/>
 
-For the **microscale analysis**, we used [GanControl](https://arxiv.org/abs/2101.02477) to generate many small variations of fake individuals on a structured lattice.
-Each node of the lattice (corresponding to a face image) can then embedded with multiple face recognition models and a vector field can finally be derived (see the paper for more details).
-This repository does not provide code for generating image, this part is done with GAN-control.
-The script at *scripts/topo/energy_finetuning_jax.py* processes gan control generated images. 
-In addition, you can see the notebook "notebooks/energy/energy_gancontrol.ipynb" to see how the energies are computed for two models.
+Then, these images can be readily embedded with the face recognition models from [this table](#embeddings) or others.
 
 
-## Requirements
+## Microscale experiment
+
+The script at [scripts/topo/energy_finetuning_jax.py](scripts/topo/) processes embedded gan control generated images.\
+In addition, you can see the notebook [notebooks/energy/energy_gancontrol.ipynb](notebooks/energy) to see how the energies are computed for two models.
+
+The paper introduces a, "energy" metric quantifying invariance, it is implemented in [scripts/topo/energy_finetuning_jax.py](scripts/topo/).
+
+The goal of this metric is to quantify how disordered a normalized vector field is (see image below). This in turn will quantify the unpredictability (~invariance) that changes in input space have in the embedding space.
+
+<img src="imgs/energy.png" alt="Alt text" width="1000"/>
+
+
+# Requirements
 To run the code, you need to install the following dependencies:
 
 ```bash
 conda env create --name envname --file=environment_updated.yml
 ```
 
-## Bibliography
+# Bibliography
 If you use this code in your research, please cite our paper:
 
 ```
