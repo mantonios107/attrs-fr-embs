@@ -43,11 +43,28 @@ The embeddings were produced by a variety of models coming from different reposi
 
 # Macroscale analysis
 
-The macroscale analysis depends on the CelebA dataset available [here](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html).
-The raw LFW dataset is used as a sanity check but is not available anymore. An aligned version is still available [here](https://www.kaggle.com/datasets/jessicali9530/lfw-dataset).
+## Datasets and preprocessing
 
-The core of the macroscale analysis can be found in the notebook at notebooks/face/experiment_distance_macroscale.ipynb.\
-It relies on preprocessing the CelebA dataset according to the pipeline described in scripts/face/README.md.
+The macroscale analysis is performed on the CelebA dataset.
+The raw Labelled Faces in the Wild (LFW) dataset is used as a sanity check, for instance to produce these plots of models on the face *verification task* i.e. classifying pairs of images as matching or non-matching:
+
+Links to datasets:\
+💾 [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html). \
+💾 [LFW(aligned)](https://www.kaggle.com/datasets/jessicali9530/lfw-dataset). (Note: the raw version used in the paper has been deprecated)
+
+We did some custom preprocessing on CelebA and LFW to subsample a higher quality subsets.
+The 7 preprocessing steps we took are by no means a gold standard.
+They are described precisely in [scripts/face/README.md](scripts/face) and reported on the flow chart below.
+The objective of the preprocessing is to address common issues like:
+- filter out obvious mislabels
+- discard images with no clean face
+- discard images with multiple possible faces
+![Alt text](imgs/Flowchart_topoface_datagen.drawio.png?raw=true)
+
+## Macroscale experiment
+
+🎯 The core of the macroscale analysis can be found in the notebook at [notebooks/face/experiment_distance_macroscale.ipynb](notebooks/face).\
+
 
 # Microscale analysis
 
