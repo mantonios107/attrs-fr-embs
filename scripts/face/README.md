@@ -33,7 +33,7 @@ The folder data/CelebA/ contains
 
 Link to dataset [here](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html), we use the raw images (not aligned). The metadata files are on the same page.
 
-## 2. Run detecion (RetinaFace)
+## 2. Run detection (RetinaFace)
 
 ```console
 python detection.py --dataset_name lfw --path_model /home/disma_user/pleroy/.insightface/models/buffalo_l/det_10g.onnx
