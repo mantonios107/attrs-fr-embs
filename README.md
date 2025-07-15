@@ -46,7 +46,8 @@ The embeddings were produced by a variety of models coming from different reposi
 ## Datasets and preprocessing
 
 The macroscale analysis is performed on the CelebA dataset.
-The raw Labelled Faces in the Wild (LFW) dataset is used as a sanity check, for instance to produce these plots of models on the face *verification task* i.e. classifying pairs of images as matching or non-matching:
+The raw Labelled Faces in the Wild (LFW) dataset is used as a sanity check, for instance to produce these histograms of distances on the face *verification task* i.e. classifying pairs of images as matching or non-matching:
+![Alt text](imgs/lfw_histogram_arcface_r18.pdf)
 
 Links to datasets:\
 💾 [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html). \
