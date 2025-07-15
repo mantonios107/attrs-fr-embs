@@ -104,7 +104,7 @@ We can do this for the other default attributes proposed by GAN-control, for exa
 ```python 
 [controller.gen_batch_by_controls(latent=initial_latent_w, input_is_latent=True,hair=x)[0] for x in segment_hair]
 ```
-The produced image would look something like this:
+The produced images would look something like this:
 <img src="imgs/segments.png" alt="Alt text" width="1000"/>
 
 Then, these images can be readily embedded with the face recognition models from [this table](#embeddings) or others.
